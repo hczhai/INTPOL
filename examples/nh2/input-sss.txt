@@ -1,0 +1,28 @@
+
+! Input file for interpolation of NH2
+! spline
+
+! A=N, B=H1, C=H2
+AtomName = N H H;
+AtomMass = 14.003074 1.007825 1.007825;
+Coordinate = RAB RBC XABC;
+
+MainFile = orig_data/nh2-2008-final.txt;
+MainColumn = 3 4 2 6;
+OutputDir = nh2-sss;
+
+VCut = -55.34542352;
+VMin = -55.63941795;
+Method = SSS;
+ManyBody = False;
+
+{ Spline: Dim = 1; Boundary = natural; Fast = False; }
+{ Spline: Dim = 2; Boundary = natural; Fast = False; }
+{ Spline: Dim = 3; Boundary = clamp; Fast = False; }
+
+Point = 2.0 3.0 40.0;
+{ Optimization: Iter = 1000; Type = minimum; }
+Frequencies;
+Point = 4 1.4 80;
+{ Optimization: Iter = 1000; Type = transition; }
+Frequencies;

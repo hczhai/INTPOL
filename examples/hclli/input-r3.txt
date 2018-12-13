@@ -1,0 +1,34 @@
+
+! Input file for interpolation of H-Cl-Li
+! RKHS
+
+! A=H, B=Cl, C=Li
+AtomName = H Cl Li;
+AtomMass = 1.007825 34.968853 7.016004;
+Coordinate = RAB RBC XABC;
+
+MainFile = orig_data/av5z.dat;
+MainColumn = 4 3 2 6;
+OutputDir = hclli-r3;
+
+VCut = -467.62105;
+VMin = -467.8048;
+Method = R3;
+ManyBody = True;
+
+{ Manybody: Method = R; E1 = -467.6348312; 
+  VCut = -467.62105 -467.62105 -467.62105; VMin = -467.8048 -467.8048 -467.8048;
+  RABFile = orig_data/rclh.txt; RBCFile = orig_data/rlicl.txt; RACFile = orig_data/rlih.txt; 
+  RABColumn = 4 6; RBCColumn = 3 6; RACColumn = 4 6; }
+
+{ RKHS: Dim = 0; Type = distancelike; Exp = 5; Regularization = 0.0; }
+{ RKHS: Dim = 1; Type = distancelike; Exp = 5; Regularization = 2.0E-15; }
+{ RKHS: Dim = 2; Type = distancelike; Exp = 5; Regularization = 2.0E-15; }
+{ RKHS: Dim = 3; Type = anglelike; Exp = 0; Regularization = 2.0E-15; }
+
+Point = 2.6 4.2 57.2;
+{ Optimization: Iter = 1000; Type = transition; }
+Frequencies;
+Point = 2.4 6 94;
+{ Optimization: Iter = 1000; Type = minimum; }
+Frequencies;

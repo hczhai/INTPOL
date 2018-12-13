@@ -1,0 +1,28 @@
+
+! Input file for interpolation of H-Cl-Li
+! spline
+
+! A=H, B=Cl, C=Li
+AtomName = H Cl Li;
+AtomMass = 1.007825 34.968853 7.016004;
+Coordinate = RAB RBC XABC;
+
+MainFile = orig_data/av5z.dat;
+MainColumn = 4 3 2 6;
+OutputDir = hclli-sss;
+
+VCut = -467.62105;
+VMin = -467.8048;
+Method = SSS;
+ManyBody = False;
+
+{ Spline: Dim = 1; Boundary = natural; Fast = False; }
+{ Spline: Dim = 2; Boundary = natural; Fast = False; }
+{ Spline: Dim = 3; Boundary = clamp; Fast = False; }
+
+Point = 2.6 4.2 57.2;
+{ Optimization: Iter = 1000; Type = transition; }
+Frequencies;
+Point = 2.4 6 94;
+{ Optimization: Iter = 1000; Type = minimum; }
+Frequencies;
